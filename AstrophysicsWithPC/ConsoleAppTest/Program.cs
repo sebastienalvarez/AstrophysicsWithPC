@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations;
+using AstrophysicsAlgorithms.NumericalAnalysis.ZerosOfFunctions;
+
 
 namespace ConsoleAppTest
 {
@@ -204,6 +206,21 @@ namespace ConsoleAppTest
                         Console.WriteLine(details);
                     }
                 }
+            }
+            else
+            {
+                Console.WriteLine("Calcul impossible");
+            }
+
+            // Calcul du zéro d'une fonction
+            Func<double, double> equationToComputeZero = (x) => Math.Exp(x) - 6 * x;
+            Func<double, double> derivedEquationToComputeZero = (x) => Math.Exp(x) - 6;
+            NewtonRaphsonMethod zeroFinder = new NewtonRaphsonMethod(equationToComputeZero, derivedEquationToComputeZero);
+            double? zero = zeroFinder.ComputeForZero(3, true);
+            if (zero.HasValue)
+            {
+                Console.WriteLine($"Zéro trouvé : {zero.Value} en {zeroFinder.IterationNumberReached} iterations");
+                Console.WriteLine(zeroFinder.BuildFormatedComputationDetailsForDisplay());
             }
             else
             {

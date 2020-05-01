@@ -21,9 +21,12 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis
 {
     public static class Utilities
     {
+        // Constantes pour le calcul des équations différentielles
         public static readonly double DefaultComputeStep = 0.0001;
-        public static uint DefaultIterationNumber = 10000;
+        public static readonly uint DefaultIterationNumber = 10000;
 
-
+        // Constantes pour le calcul d'un zéro d'une fonction
+        public static readonly double DefaultPrecision = 0.0001;
+        public static readonly uint DefaultMaximumIterationNumber = 1000;
     }
 }

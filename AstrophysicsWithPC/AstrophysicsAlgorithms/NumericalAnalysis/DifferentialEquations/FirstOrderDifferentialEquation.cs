@@ -35,7 +35,7 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         public uint IterationNumber { get; private set; }
 
         /// <summary>
-        /// Détails des itérations du du calcul
+        /// Détails des itérations du calcul
         /// </summary>
         public double[,] ComputationDetails { get; protected set; }
 
