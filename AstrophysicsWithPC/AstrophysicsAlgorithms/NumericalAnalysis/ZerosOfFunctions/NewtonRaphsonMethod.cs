@@ -80,7 +80,7 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.ZerosOfFunctions
         }
 
         /// <summary>
-        /// définit la précision à atteindre sur le calcul, le nombre d'itérations maximum est alors le nombre d'itérations maximum par défaut
+        /// Définit la précision à atteindre sur le calcul, le nombre d'itérations maximum est alors le nombre d'itérations maximum par défaut
         /// </summary>
         /// <param name="a_precision">Pas de calcul</param>
         public void SetPrecision(double a_precision)

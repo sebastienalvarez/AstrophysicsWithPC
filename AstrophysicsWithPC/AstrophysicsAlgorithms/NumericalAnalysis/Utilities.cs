@@ -28,5 +28,8 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis
         // Constantes pour le calcul d'un zéro d'une fonction
         public static readonly double DefaultPrecision = 0.0001;
         public static readonly uint DefaultMaximumIterationNumber = 1000;
+
+        // Constante pour le calcul d'une intégrale
+        public static readonly uint DefaultIntervalNumber = 1000;
     }
 }

@@ -53,12 +53,11 @@
     <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderEulerMethod.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderHeunMethod.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderRungeKuttaMethod.cs" />
+    <Compile Include="NumericalAnalysis\Integrals\SimpsonMethod.cs" />
     <Compile Include="NumericalAnalysis\Utilities.cs" />
     <Compile Include="NumericalAnalysis\ZerosOfFunctions\NewtonRaphsonMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NumericalAnalysis\Integrals\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

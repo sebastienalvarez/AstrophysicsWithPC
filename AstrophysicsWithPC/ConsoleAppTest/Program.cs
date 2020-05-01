@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations;
 using AstrophysicsAlgorithms.NumericalAnalysis.ZerosOfFunctions;
+using AstrophysicsAlgorithms.NumericalAnalysis.Integrals;
 
 
 namespace ConsoleAppTest
@@ -226,6 +227,21 @@ namespace ConsoleAppTest
             {
                 Console.WriteLine("Calcul impossible");
             }
+
+            // Calcul d'une intégrale
+            Func<double, double> equationToInteger = (x) => Math.Exp(-x) + 2 * x;
+            SimpsonMethod integral = new SimpsonMethod(equationToInteger);
+            integral.SetIterationNumber(100);
+            double? computedIntegral = integral.ComputeIntegral(2, 6);
+            if (computedIntegral.HasValue)
+            {
+                Console.WriteLine($"Intégrale : {computedIntegral.Value}");
+            }
+            else
+            {
+                Console.WriteLine("Calcul impossible");
+            }
+
 
             Console.ReadKey();
         }
