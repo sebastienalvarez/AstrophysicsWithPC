@@ -41,9 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NumericalAnalysis\DifferentialEquations\EulerMethod.cs" />
-    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstDifferentialEquation.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderCauchyMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderEulerMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderDifferentialEquation.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderHeunMethod.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\IFirstOrderDifferentialEquation.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\ISecondOrderDifferentialEquation.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderRungeKuttaMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderCauchyMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderDifferentialEquation.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderEulerMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderHeunMethod.cs" />
+    <Compile Include="NumericalAnalysis\DifferentialEquations\SecondOrderRungeKuttaMethod.cs" />
     <Compile Include="NumericalAnalysis\Utilities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

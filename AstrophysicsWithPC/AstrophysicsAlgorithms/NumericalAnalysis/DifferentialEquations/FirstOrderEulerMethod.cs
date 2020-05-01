@@ -1,6 +1,6 @@
 ﻿/****************************************************************************************************************************************
  * 
- * Classe EulerMethod
+ * Classe FirstOrderEulerMethod
  * Auteur : S. ALVAREZ
  * Date : 28-04-2020
  * Statut : En Cours
@@ -15,14 +15,14 @@ using System;
 
 namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
 {
-    public class EulerMethod : FirstDifferentialEquation
+    public class FirstOrderEulerMethod : FirstOrderDifferentialEquation
     {
         // CONSTRUCTEUR
         /// <summary>
         /// Création d'une instance avec un delegate représentant l'équation différentielle
         /// </summary>
         /// <param name="a_equation">Delegate représentant l'équation différentielle</param>
-        public EulerMethod(Func<double, double, double> a_equation) : base(a_equation)
+        public FirstOrderEulerMethod(Func<double, double, double> a_equation) : base(a_equation)
         {
         }
 

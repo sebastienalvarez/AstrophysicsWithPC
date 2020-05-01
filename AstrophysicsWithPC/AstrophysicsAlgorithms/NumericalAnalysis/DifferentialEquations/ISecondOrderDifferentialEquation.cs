@@ -1,13 +1,14 @@
 ﻿/****************************************************************************************************************************************
  * 
- * Interface IFirstOrderDifferentialEquation
+ * Interface ISecondOrderDifferentialEquation
  * Auteur : S. ALVAREZ
- * Date : 28-04-2020
+ * Date : 29-04-2020
  * Statut : En Cours
  * Version : 1
  * Revisions : NA
  * 
- * Objet : Interface pour les différentes méthodes de calcul numérique des équations différentielles du 1er ordre.
+ * Objet : Interface pour les différentes méthodes de calcul numérique des équations différentielles du 2ème ordre. Une équation
+ *         différentielle du 2èmeordre se décompose en 2 équations différentielles du 1er ordre chainées.
  * 
  ****************************************************************************************************************************************/
 
@@ -15,13 +16,13 @@ using System;
 
 namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
 {
-    public interface IFirstOrderDifferentialEquation
+    public interface ISecondOrderDifferentialEquation
     {
         // POPRIETES
         /// <summary>
-        /// Equation différentielle du 1er ordre : y' = f(x,y)
+        /// Equations différentielles du 1er ordre : y' = f(x,y,z) et z' = g(x,y,z)
         /// </summary>
-        Func<double, double, double> Equation { get; }
+        Func<double, double, double, double>[] Equations { get; }
 
         /// <summary>
         /// Pas de calcul
@@ -40,11 +41,10 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
 
         // METHODES
         /// <summary>
-        /// Définit le point (x0, y0) de départ pour le calcul
+        /// Définit les points (x0, y0) et (x0, z0) de départ pour le calcul (conditions initiales)
         /// </summary>
-        /// <param name="a_x">x0</param>
-        /// <param name="a_y">y0</param>
-        void SetStartingPoint(double a_x, double a_y);
+        /// <param name="a_startingPoints">Points de départ pour le calcul</param>
+        void SetStartingPoints(double[] a_startingPoints);
 
         /// <summary>
         /// définit le pas de calcul à utiliser, le nombre d'itérations utilisé est issu du pas de calcul défini
@@ -59,12 +59,12 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         void SetIterationNumber(uint a_iterationNumber);
 
         /// <summary>
-        /// Calcule la valeur de la fonction y pour la valeur de x spécifiée
+        /// Calcule la valeur des fonctions y et z pour la valeur de x spécifiée
         /// </summary>
-        /// <param name="a_x">Valeur de x pour laquelle la fonction doit être calculée</param>
+        /// <param name="a_x">Valeur de x pour laquelle les fonctions doivent être calculées</param>
         /// <param name="a_isIterationDetailsAsked">Flag pour spécifier la sortie des itérations des calculs dans la propriété ComputationDetails</param>
-        /// <returns>Valeur de la fonction y ou null si le calcul n'est pas possible avec les paramètres définis</returns>
-        double? ComputeForGivenX(double a_x, bool a_isIterationDetailsAsked = false);
+        /// <returns>Valeurs des fonctions y et z ou null si le calcul n'est pas possible avec les paramètres définis</returns>
+        double[] ComputeForGivenX(double a_x, bool a_isIterationDetailsAsked = false);
 
         /// <summary>
         /// Génère un string formatés avec les résultats contenus dans la propriété ComputationDetails
