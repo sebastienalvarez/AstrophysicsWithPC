@@ -1,0 +1,41 @@
+﻿<Window x:Class="CometTailModeling.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CometTailModeling"
+        mc:Ignorable="d"
+        Title="Comet Tail Modeling" Height="450" Width="800"
+        SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Zone d'information initiale-->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="5">
+            <Label Padding="5,5,5,0">Comet tail modeling using chapter 2 of "Astrophysics with a PC" by Paul Hellings</Label>
+            <Label>The following 4 parameters are necessary (uses tip tool for more details):</Label>
+        </StackPanel>
+
+        <!--Zone de définition de la comète-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <Label Content="Perihelion (AU)"></Label>
+            <TextBox x:Name="PerihelionTextBox" Text="{Binding Perihelion}" VerticalAlignment="Center" Width="40" ToolTip="Perihelion of the comet in AU (point of closest approach)" TextChanged="TextBox_TextChanged"></TextBox>
+            <Label Content="Eccentricity"></Label>
+            <TextBox x:Name="EccentricityTextBox" Text="{Binding Eccentricity}" VerticalAlignment="Center" Width="40" ToolTip="Eccentricity of the comet between 0 (circular) and 1 (parabolic), comets have almost all an eccentricty near 1" TextChanged="TextBox_TextChanged"></TextBox>
+            <Label Content="Force parameter"></Label>
+            <TextBox x:Name="ForceParameterTextBox" Text="{Binding ForceParameter}" VerticalAlignment="Center" Width="40" ToolTip="Force parameter combining sun gravitation and sun ray repulsion" TextChanged="TextBox_TextChanged"></TextBox>
+            <Label Content="Outflow speed"></Label>
+            <TextBox x:Name="OutFlowVelocityTextBox" Text="{Binding OutFlowVelocity}" VerticalAlignment="Center" Width="40" ToolTip="Outflow speed of particles leaving the comet after evaporation or sublimation" TextChanged="TextBox_TextChanged"></TextBox>
+            <Button x:Name="AnimationButton" Content="Animate" Click="Button_Click" Margin="10 0 0 0" IsEnabled="{Binding IsInputValid}" ToolTip="Computes and shows an animation of the comet"></Button>
+            <Button x:Name="StaticButton" Content="Compute" Click="Button_Click" Margin="10 0 0 0" IsEnabled="{Binding IsInputValid}" ToolTip="Computes and shows comet tails at some positions"></Button>
+        </StackPanel>
+
+        <!--Zone d'affichage des résultats du calcul-->
+        <Canvas x:Name="canvas" Grid.Row="2" Margin="20" ClipToBounds="False"></Canvas>
+
+    </Grid>
+</Window>

@@ -1,4 +1,4 @@
-﻿/****************************************************************************************************************************************
+﻿/*************************** *************************************************************************************************************
  * 
  * Classe Utilities
  * Auteur : S. ALVAREZ
@@ -31,5 +31,15 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis
 
         // Constante pour le calcul d'une intégrale
         public static readonly uint DefaultIntervalNumber = 1000;
+
+        public static double DegreeToRadian(double a_degree)
+        {
+            return a_degree * Math.PI / 180.0;
+        }
+
+        public static double RadianToDegree(double a_radian)
+        {
+            return a_radian * 180.0 / Math.PI;
+        }
     }
 }

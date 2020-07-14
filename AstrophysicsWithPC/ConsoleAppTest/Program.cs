@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations;
 using AstrophysicsAlgorithms.NumericalAnalysis.ZerosOfFunctions;
 using AstrophysicsAlgorithms.NumericalAnalysis.Integrals;
-
+using AstrophysicsAlgorithms.CometTailModeling;
 
 namespace ConsoleAppTest
 {
@@ -241,6 +241,10 @@ namespace ConsoleAppTest
             {
                 Console.WriteLine("Calcul impossible");
             }
+
+            // Calcul d'une comète
+            Comet comet = new Comet(0.5, 0.95, 1.0, 0.03);
+            var tailResult = comet.ComputeSyndynams(-114.5916);
 
 
             Console.ReadKey();
