@@ -7,6 +7,8 @@ using AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations;
 using AstrophysicsAlgorithms.NumericalAnalysis.ZerosOfFunctions;
 using AstrophysicsAlgorithms.NumericalAnalysis.Integrals;
 using AstrophysicsAlgorithms.CometTailModeling;
+using AstrophysicsAlgorithms.MeteorDynamics;
+using System.IO;
 
 namespace ConsoleAppTest
 {
@@ -246,6 +248,17 @@ namespace ConsoleAppTest
             Comet comet = new Comet(0.5, 0.95, 1.0, 0.03);
             var tailResult = comet.ComputeSyndynams(-114.5916);
 
+            // TEST CALCUL METEORE
+            Meteor meteor = new Meteor(0.01, 160, 20, 40, 1, 1e-11, 0.02);
+            //Meteor meteor = new Meteor(5000, 160, 20, 60, 1, 1e-11, 0.02);
+            meteor.ComputeDynamics();
+            meteor.OutputDataToConsole();
+
+            meteor.ComputeDynamicsWithDefaultMethod();
+            meteor.OutputDataToConsole();
+
+            //string meteorFilePath = Path.Combine(Environment.CurrentDirectory, "meteor_output.csv");
+            //meteor.OutputDataToCsv(meteorFilePath);
 
             Console.ReadKey();
         }

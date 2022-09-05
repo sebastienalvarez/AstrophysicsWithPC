@@ -2,16 +2,18 @@
  * 
  * Classe FirstOrderHeunMethod
  * Auteur : S. ALVAREZ
- * Date : 28-04-2020
+ * Date : 04-09-2022
  * Statut : En Cours
- * Version : 1
- * Revisions : NA
+ * Version : 2
+ * Revisions : 1 - 28-04-2020 : 1ère version
+ *             2 - 04-09-2022 : modification pour permettre le couplage de n équations différentielles du 1er ordre
  * 
  * Objet : Classe permettant de calculer la solution d'un équation différentielle du 1er ordre par la méthode de Heun.
  * 
  ****************************************************************************************************************************************/
 
 using System;
+using System.Collections.Generic;
 
 namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
 {
@@ -26,7 +28,33 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         {
         }
 
-        // METHODE
+        // METHODES
+        /// <summary>
+        /// Calcule la valeur de la fonction y au prochain pas de calcul
+        /// </summary>
+        /// <param name="a_x">Valeur de x au pas précédent</param>
+        /// <param name="a_y">Valeur de y au pas précédent</param>
+        /// <param name="a_increment">Valeur de l'incrément</param>
+        /// <param name="a_isIterationDetailsAsked">Flag pour spécifier la sortie des itérations des calculs dans la propriété ComputationDetails</param>
+        /// <returns>Valeurs de x et de la fonction y du pas de calcul</returns>
+        public override double[] ComputeForNextStep(double a_x, double a_y, double a_increment, bool a_isIterationDetailsAsked = false)
+        {
+            double predx = a_x + a_increment;
+            double predy = a_y + a_increment * Equation(a_x, a_y);
+            double y = a_y + 0.5 * a_increment * (Equation(a_x, a_y) + Equation(predx, predy));
+            double x = a_x + a_increment;
+            double[] computedValues = new double[] { x, y };
+            if (a_isIterationDetailsAsked)
+            {
+                if (ComputationDetails == null)
+                {
+                    ComputationDetails = new List<double[]>();
+                }
+                ComputationDetails.Add(computedValues);
+            }
+            return computedValues;
+        }
+
         /// <summary>
         /// Calcule la valeur de la fonction y pour la valeur de x spécifiée
         /// </summary>
@@ -38,38 +66,25 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
             if (CheckIfComputationPossible(a_x))
             {
                 ComputationDetails = null;
-                int index = 0;
                 if (a_isIterationDetailsAsked)
                 {
-                    ComputationDetails = new double[IterationNumber + 1, 2];
+                    ComputationDetails = new List<double[]>();
                 }
                 double x = xStartingPoint.Value;
                 double y = yStartingPoint.Value;
-                double predx;
-                double predy;
+                double[] currentValues = new double[] { x, y };
                 if (a_isIterationDetailsAsked)
                 {
-                    ComputationDetails[index, 0] = x;
-                    ComputationDetails[index, 1] = y;
-                    index++;
+                    ComputationDetails.Add(currentValues);
                 }
-                while (x < a_x)
+                while (currentValues[0] < a_x)
                 {
                     double increment = ComputeStep;
-                    if (a_x - x < ComputeStep)
+                    if (a_x - currentValues[0] < ComputeStep)
                     {
-                        increment = a_x - x;
+                        increment = a_x - currentValues[0];
                     }
-                    predx = x + increment;
-                    predy = y + increment * Equation(x, y);
-                    y += 0.5 * increment * (Equation(x, y) + Equation(predx, predy));
-                    x += increment;
-                    if (a_isIterationDetailsAsked)
-                    {
-                        ComputationDetails[index, 0] = x;
-                        ComputationDetails[index, 1] = y;
-                        index++;
-                    }
+                    currentValues = ComputeForNextStep(currentValues[0], currentValues[1], increment, a_isIterationDetailsAsked);
                 }
                 return y;
             }

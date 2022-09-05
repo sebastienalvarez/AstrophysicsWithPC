@@ -2,16 +2,18 @@
  * 
  * Classe FirstOrderDifferentialEquation
  * Auteur : S. ALVAREZ
- * Date : 28-04-2020
+ * Date : 04-09-2022
  * Statut : En Cours
- * Version : 1
- * Revisions : NA
+ * Version : 2
+ * Revisions : 1 - 28-04-2020 : 1ère version
+ *             2 - 04-09-2022 : modification pour permettre le couplage de n équations différentielles du 1er ordre
  * 
  * Objet : Classe abstraite permettant de calculer la solution d'un équation différentielle du 1er ordre.
  * 
  ****************************************************************************************************************************************/
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
@@ -22,7 +24,7 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         /// <summary>
         /// Equation différentielle du 1er ordre : y' = f(x,y)
         /// </summary>
-        public Func<double, double, double> Equation { get; }
+        public Func<double, double, double> Equation { get; set; }
 
         /// <summary>
         /// Pas de calcul
@@ -35,9 +37,9 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         public uint IterationNumber { get; private set; }
 
         /// <summary>
-        /// Détails des itérations du calcul
+        /// Détails des itérations du du calcul
         /// </summary>
-        public double[,] ComputationDetails { get; protected set; }
+        public List<double[]> ComputationDetails { get; protected set; }
 
         /// <summary>
         /// x0 du point de départ
@@ -63,6 +65,16 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         }
 
         // METHODES
+        /// <summary>
+        /// Calcule la valeur de la fonction y au prochain pas de calcul
+        /// </summary>
+        /// <param name="a_x">Valeur de x au pas précédent</param>
+        /// <param name="a_y">Valeur de y au pas précédent</param>
+        /// <param name="a_increment">Valeur de l'incrément</param>
+        /// <param name="a_isIterationDetailsAsked">Flag pour spécifier la sortie des itérations des calculs dans la propriété ComputationDetails</param>
+        /// <returns>Valeurs de x et de la fonction y du pas de calcul</returns>
+        public abstract double[] ComputeForNextStep(double a_x, double a_y, double a_increment, bool a_isIterationDetailsAsked = false);
+
         /// <summary>
         /// Calcule la valeur de la fonction y pour la valeur de x spécifiée
         /// </summary>
@@ -174,18 +186,17 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         /// <returns>String formatés avec les résultats contenus dans la propriété ComputationDetails</returns>
         public string BuildFormatedComputationDetailsForDisplay()
         {
-            if(ComputationDetails != null && ComputationDetails.Length > 0)
+            if(ComputationDetails != null && ComputationDetails.Count > 0)
             {
                 StringBuilder details = new StringBuilder();
                 details.AppendLine($"{"x".PadRight(14)}{"y".PadRight(14)}");
-                for (int i = 0; i < ComputationDetails.GetLength(0); i++)
+                for (int i = 0; i < ComputationDetails.Count; i++)
                 {
-                    details.AppendLine($"{ComputationDetails[i, 0].ToString("f8").PadRight(14)}{ComputationDetails[i, 1].ToString("f8").PadRight(14)}");
+                    details.AppendLine($"{ComputationDetails[i][0].ToString("f8").PadRight(14)}{ComputationDetails[i][1].ToString("f8").PadRight(14)}");
                 }
                 return details.ToString();
             }
             return null;
         }
-
     }
 }

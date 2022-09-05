@@ -44,6 +44,7 @@
     <Compile Include="CometTailModeling\Comet.cs" />
     <Compile Include="CometTailModeling\Point.cs" />
     <Compile Include="CometTailModeling\TailModel.cs" />
+    <Compile Include="MeteorDynamics\Meteor.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderCauchyMethod.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderEulerMethod.cs" />
     <Compile Include="NumericalAnalysis\DifferentialEquations\FirstOrderDifferentialEquation.cs" />

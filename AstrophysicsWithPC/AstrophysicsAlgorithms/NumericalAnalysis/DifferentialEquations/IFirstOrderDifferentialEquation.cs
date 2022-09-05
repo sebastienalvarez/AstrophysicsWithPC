@@ -2,16 +2,18 @@
  * 
  * Interface IFirstOrderDifferentialEquation
  * Auteur : S. ALVAREZ
- * Date : 28-04-2020
+ * Date : 04-09-2022
  * Statut : En Cours
- * Version : 1
- * Revisions : NA
+ * Version : 2
+ * Revisions : 1 - 28-04-2020 : 1ère version
+ *             2 - 04-09-2022 : modification pour permettre le couplage de n équations différentielles du 1er ordre
  * 
  * Objet : Interface pour les différentes méthodes de calcul numérique des équations différentielles du 1er ordre.
  * 
  ****************************************************************************************************************************************/
 
 using System;
+using System.Collections.Generic;
 
 namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
 {
@@ -21,7 +23,7 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         /// <summary>
         /// Equation différentielle du 1er ordre : y' = f(x,y)
         /// </summary>
-        Func<double, double, double> Equation { get; }
+        Func<double, double, double> Equation { get; set; }
 
         /// <summary>
         /// Pas de calcul
@@ -36,7 +38,7 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         /// <summary>
         /// Détails des itérations du du calcul
         /// </summary>
-        double[,] ComputationDetails { get; }
+        List<double[]> ComputationDetails { get; }
 
         // METHODES
         /// <summary>
@@ -57,6 +59,16 @@ namespace AstrophysicsAlgorithms.NumericalAnalysis.DifferentialEquations
         /// </summary>
         /// <param name="a_iterationNumber">Nombre d'itérations</param>
         void SetIterationNumber(uint a_iterationNumber);
+
+        /// <summary>
+        /// Calcule la valeur de la fonction y au prochain pas de calcul
+        /// </summary>
+        /// <param name="a_x">Valeur de x au pas précédent</param>
+        /// <param name="a_y">Valeur de y au pas précédent</param>
+        /// <param name="a_increment">Valeur de l'incrément</param>
+        /// <param name="a_isIterationDetailsAsked">Flag pour spécifier la sortie des itérations des calculs dans la propriété ComputationDetails</param>
+        /// <returns>Valeurs de x et de la fonction y du pas de calcul</returns>
+        double[] ComputeForNextStep(double a_x, double a_y, double a_increment, bool a_isIterationDetailsAsked = false);
 
         /// <summary>
         /// Calcule la valeur de la fonction y pour la valeur de x spécifiée
