@@ -1,0 +1,49 @@
+﻿<Window x:Class="RestrictedThreeBodyProblem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RestrictedThreeBodyProblem"
+        mc:Ignorable="d"
+        Title="Restricted Three-Body problem" Height="800" Width="1200"
+        SizeChanged="Window_SizeChanged">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Zone d'information initiale-->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Margin="5">
+            <Label Padding="5,5,5,0">Restricted Three-Body problem modeling using chapter 4 of "Astrophysics with a PC" by Paul Hellings</Label>
+            <Label>As initial conditions needs to be computed carefully, only examples of the book are computed in the following</Label>
+        </StackPanel>
+
+        <!--Zone de définition du problème restreint des 3 corps-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+            <Label Content="Problem selection"></Label>
+            <ComboBox x:Name="ProblemSelectionComboBox" ItemsSource="{Binding ProblemSelections}" SelectedIndex="{Binding ProblemSelectedIndex}" IsEditable="False" IsEnabled="{Binding IsComputationEnabled}" Width="200" ToolTip="Select one of the example of the book" SelectionChanged="ProblemSelectionComboBox_SelectionChanged"></ComboBox>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+            <Label Content="Mass Parameter"></Label>
+            <TextBox x:Name="MassParameterTextBox" Text="{Binding MassParameter}" VerticalAlignment="Center" Width="100" IsEnabled="False"></TextBox>
+            <Label Content="x0"></Label>
+            <TextBox x:Name="X0TextBox" Text="{Binding InitialConditionX}" VerticalAlignment="Center" Width="100" IsEnabled="False"></TextBox>
+            <Label Content="y0"></Label>
+            <TextBox x:Name="Y0TextBox" Text="{Binding InitialConditionY}" VerticalAlignment="Center" Width="100" IsEnabled="False"></TextBox>
+            <Label Content="u0"></Label>
+            <TextBox x:Name="U0TextBox" Text="{Binding InitialConditionU}" VerticalAlignment="Center" Width="100" IsEnabled="False"></TextBox>
+            <Label Content="v0"></Label>
+            <TextBox x:Name="V0TextBox" Text="{Binding InitialConditionV}" VerticalAlignment="Center" Width="100" IsEnabled="False"></TextBox>
+            <Button x:Name="AnimationButton" Content="Animate" Click="Button_Click" Margin="10 0 0 0" IsEnabled="{Binding IsComputationEnabled}" ToolTip="Computes and shows an animation of the relative movement of the third body"></Button>
+            <Button x:Name="StaticButton" Content="Compute" Click="Button_Click" Margin="10 0 0 0" IsEnabled="{Binding IsComputationEnabled}" ToolTip="Computes and shows the relative movement of the third body"></Button>
+        </StackPanel>
+
+        <!--Zone d'affichage des résultats du calcul-->
+        <Canvas x:Name="canvas" Grid.Row="3" Margin="20" ClipToBounds="False"></Canvas>
+
+    </Grid>
+</Window>

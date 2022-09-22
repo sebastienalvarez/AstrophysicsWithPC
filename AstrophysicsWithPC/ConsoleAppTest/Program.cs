@@ -9,6 +9,7 @@ using AstrophysicsAlgorithms.NumericalAnalysis.Integrals;
 using AstrophysicsAlgorithms.CometTailModeling;
 using AstrophysicsAlgorithms.MeteorDynamics;
 using System.IO;
+using AstrophysicsAlgorithms.RestrictedThreeBodyProblem;
 
 namespace ConsoleAppTest
 {
@@ -16,6 +17,11 @@ namespace ConsoleAppTest
     {
         static void Main(string[] args)
         {
+            // Test Restricted Three-Body problem
+            RestrictedThreeBodyProblem problem = new RestrictedThreeBodyProblem(0.000953875, -0.509046125, 0.883345912, 0.0258975212, 0.0149272418);
+            problem.Compute(0.4, 20);
+            problem.DisplayResultsOnConsole();
+
             // Définition de l'équation différentielle à tester
             Func<double, double, double> equation = (x, y) => -2 * y * x;
             bool isIterationDetailsAsked = true;

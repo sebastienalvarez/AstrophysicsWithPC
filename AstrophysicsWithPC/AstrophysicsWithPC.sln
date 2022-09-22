@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstrophysicsAlgorithms", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CometTailModeling", "CometTailModeling\CometTailModeling.csproj", "{AA8B02A3-CE69-4E76-8956-8A14161372B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestrictedThreeBodyProblem", "RestrictedThreeBodyProblem\RestrictedThreeBodyProblem.csproj", "{145E85E0-777C-4DA1-BB21-29F00D211808}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AA8B02A3-CE69-4E76-8956-8A14161372B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA8B02A3-CE69-4E76-8956-8A14161372B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA8B02A3-CE69-4E76-8956-8A14161372B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{145E85E0-777C-4DA1-BB21-29F00D211808}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{145E85E0-777C-4DA1-BB21-29F00D211808}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{145E85E0-777C-4DA1-BB21-29F00D211808}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{145E85E0-777C-4DA1-BB21-29F00D211808}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
